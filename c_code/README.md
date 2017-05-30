@@ -1,6 +1,6 @@
 # Generate c code
 
-I used in this project a reccurent neural network to generate c code based on a dataset of c file from from the <a href="">linux repository</a>.
+I used in this project a reccurent neural network to generate c code based on a dataset of c files from from the <a href="https://github.com/torvalds/linux">linux repository</a>.
 
 More Information about the project could be find on my medium article : <a href=""> Here </a>
 
