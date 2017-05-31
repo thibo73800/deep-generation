@@ -27,7 +27,7 @@ class Use(Model):
         """
         Model.__init__(self, training=False, ckpt=ckpt)
 
-        self.code = [c for c in "\n\nstatic int"]
+        self.code = [c for c in "\n\n static int"]
 
     def add_to_code(self, softmax):
         """
@@ -38,11 +38,10 @@ class Use(Model):
                 Return softmax index choosen
         """
         softmax = np.squeeze(softmax)
-        softmax[np.argsort(softmax)[:-2]] = 0
+        softmax[np.argsort(softmax)[:-4]] = 0
         softmax = softmax / np.sum(softmax)
         c = np.random.choice(len(self.int_to_vocab), 1, p=softmax)[0]
-        self.code.append(self.int_to_vocab[str(np.random.choice(len(self.int_to_vocab), 1, p=softmax)[0])])
-
+        self.code.append(self.int_to_vocab[str(c)])
         return c
 
     def create_code(self, size):
@@ -64,9 +63,7 @@ class Use(Model):
 
         for i in range(size):
             x[0,0] = c
-            feed = {self.inputs: x,
-                    self.keep_prob: 1.,
-                    self.initial_state: previous_state}
+            feed = {self.inputs: x, self.keep_prob: 1., self.initial_state: previous_state}
             softmax, previous_state = self.session.run([self.softmax, self.final_state], feed_dict=feed)
             c = self.add_to_code(softmax)
 

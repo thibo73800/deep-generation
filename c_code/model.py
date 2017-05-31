@@ -1,3 +1,5 @@
+# -*- coding: utf-8 -*-
+
 import tensorflow as tf
 import os
 import numpy as np
@@ -17,7 +19,7 @@ class Model(object):
     CHECKPOINT_FOLDER = os.path.join(os.path.dirname(os.path.abspath(__file__)), "checkpoints")
     TENSORBOARD_LOG = os.path.join(os.path.dirname(os.path.abspath(__file__)), "logs/train")
 
-    SEQUENCE_SIZE = 150
+    SEQUENCE_SIZE = 100
     BATCH_SIZE = 200
 
     HIDDEN_LAYER_SIZE = 512
@@ -75,6 +77,8 @@ class Model(object):
         self.train_writer = tf.summary.FileWriter(os.path.join(self.TENSORBOARD_LOG, model_param), self.session.graph)
         self.train_writer_it = 0
 
+        self.model_it = 0
+
         if ckpt is not None:
             self.saver.restore(self.session, ckpt)
             log.info("checkpoints succesfully loaded")
@@ -102,8 +106,9 @@ class Model(object):
         """
             Save the model
         """
+        self.model_it += 1
         print ("Save model")
-        self.saver.save(self.session, "checkpoints/last.ckpt")
+        self.saver.save(self.session, "checkpoints/dump_model_%s.ckpt" % self.model_it)
         print ('Model succesfully saved !')
 
     @staticmethod
@@ -134,7 +139,8 @@ class Model(object):
         encoded = np.array([vocab_to_int[c] for c in content], dtype=np.int32)
 
         with open(Model.DATASET_FILE, "w+") as d:
-            d.write(json.dumps({"encoded" : [int(i) for i in encoded], "vocab_to_int" : vocab_to_int, "int_to_vocab" : int_to_vocab}))
+            json_file = json.dumps({"encoded" : [int(i) for i in encoded], "vocab_to_int" : vocab_to_int, "int_to_vocab" : int_to_vocab})
+            d.write(json_file)
             d.close()
 
         return encoded, vocab_to_int, int_to_vocab
