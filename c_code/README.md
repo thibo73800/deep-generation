@@ -4,6 +4,16 @@ I used in this project a reccurent neural network to generate c code based on a 
 
 More Information about the project could be find on my medium article : <a href=""> Here </a>
 
+
+## Requirements
+
+<ul>
+<li>Tensorflow</li>
+<li>Numpy</li>
+<li>Docopt</li>
+<li>Matplotlib</li>
+</ul>
+
 ## How to train the model
 
  
