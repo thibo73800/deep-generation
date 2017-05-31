@@ -4,6 +4,8 @@ I used in this project a reccurent neural network to generate c code based on a 
 
 More Information about the project could be find on my medium article : <a href=""> Here </a>
 
+<a href="" ><img src="img/leo_vallet.jpg" /></a>
+<center><a href="https://www.linkedin.com/in/leovallet/">Illustration by Léo Vallet</a></center>
 
 ## Requirements
 
