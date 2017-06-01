@@ -10,6 +10,7 @@ More Information about the project could be find on my medium article : <a href=
 ## Requirements
 
 <ul>
+<li>Python 3</li>
 <li>Tensorflow</li>
 <li>Numpy</li>
 <li>Docopt</li>
